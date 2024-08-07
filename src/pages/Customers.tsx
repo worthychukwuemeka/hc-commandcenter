@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import { FaSortUp, FaSortDown } from 'react-icons/fa'; // Ensure this import exists
 import { Link } from 'react-router-dom';
+import { Pagination } from 'react-bootstrap';
 
 interface TableRowProps {
   id: number;
@@ -325,7 +326,7 @@ const Customers: React.FC = () => {
                       {/* Search box */}
                       <input
                         type="text"
-                        placeholder="Search Orders..."
+                        placeholder="Search Customers..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="form-control"
@@ -440,7 +441,7 @@ const Customers: React.FC = () => {
                                 <div className="ms-3 d-flex gap-2 align-items-center">
 
                                   <div className="hstack gap-2 justify-content-end">
-                                    <Link to="/order-details" className="avatar-text avatar-md text-primary me-2">
+                                    <Link to="/customer-details" className="avatar-text avatar-md text-primary me-2">
                                       <i className="feather feather-eye"></i>
                                     </Link>
 
@@ -470,34 +471,14 @@ const Customers: React.FC = () => {
                             </tr>
                           ))}
 
-                          {/*<tr>
-                            <td>
-                              <div className="d-flex align-items-center gap-3">
-                                <div className="avatar-image">
-                                  <img src="assets/images/avatar/2.png" alt="" className="img-fluid" />
-                                </div>
-                                <a href="javascript:void(0);">
-                                  <span className="d-block">{rows.customerName}</span>
-                                  <span className="fs-12 d-block fw-normal text-muted">arcie.tones@gmail.com</span>
-                                </a>
-                              </div>
-                            </td>
-                            <td>
-                              <span className="badge bg-gray-200 text-dark">Sent</span>
-                            </td>
-                            <td>11/06/2023 10:53</td>
-                            <td>
-                              <span className="badge bg-soft-success text-success">Completed</span>
-                            </td>
-                            <td className="text-end">
-                              <a href="javascript:void(0);">
-                                <i className="feather-more-vertical"></i>
-                              </a>
-                            </td>
-                          </tr>*/}
 
                         </tbody>
+
+                        
                       </table>
+                      <div>
+                          <Pagination />
+                        </div>
                     </div>
                   </div>
 

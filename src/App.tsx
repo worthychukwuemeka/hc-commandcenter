@@ -13,6 +13,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import OrderDetails from './pages/OrderDetails';
 import VerifyOTP from './pages/VerifyOTP';
+import CustomerDetails from './pages/CustomerDetails';
+import VendorDetails from './pages/VendorDetails';
 
 const App = () => {
   return (
@@ -30,6 +32,8 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/order-details" element={<OrderDetails />} />
+        <Route path="/customer-details" element={<CustomerDetails />} />
+        <Route path="/vendor-details" element={<VendorDetails />} />
       </Routes>
     </Router>
   );
