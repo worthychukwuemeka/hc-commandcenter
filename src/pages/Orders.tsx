@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import { FaSortAlphaDown, FaSortNumericDown, FaCalendarAlt, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { Link } from 'react-router-dom';
+
 
 interface TableRowProps {
   id: number;
@@ -18,6 +20,7 @@ interface TableRowProps {
 const Orders: React.FC = () => {
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const rows: TableRowProps[] = [
@@ -89,9 +92,22 @@ const Orders: React.FC = () => {
     );
   };
 
-  const sortedRows = React.useMemo(() => {
+  const filteredRows = useMemo(() => {
+    return rows.filter(row =>
+      row.orderId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.orderItem.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.orderedBy.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.price.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.date.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.transaction.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.status.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery, rows]);
+
+
+  const sortedRows = useMemo(() => {
     if (sortConfig !== null) {
-      return [...rows].sort((a, b) => {
+      return [...filteredRows].sort((a, b) => {
         if (a[sortConfig.key as keyof TableRowProps] < b[sortConfig.key as keyof TableRowProps]) {
           return sortConfig.direction === 'asc' ? -1 : 1;
         }
@@ -101,8 +117,8 @@ const Orders: React.FC = () => {
         return 0;
       });
     }
-    return rows;
-  }, [rows, sortConfig]);
+    return filteredRows;
+  }, [filteredRows, sortConfig]);
 
   return (
     <div>
@@ -199,10 +215,14 @@ const Orders: React.FC = () => {
                     </div>
                   </div>
 
-                  <a href="invoice-create.html" className="btn btn-primary">
-                    <i className="feather-plus me-2"></i>
-                    <span>Create Invoice</span>
-                  </a>
+                  {/* Search box */}
+                  <input
+                    type="text"
+                    placeholder="Search Orders..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="form-control"
+                  />
                 </div>
               </div>
               <div className="d-md-none d-flex align-items-center">
@@ -417,9 +437,10 @@ const Orders: React.FC = () => {
                           <div className="ms-3 d-flex gap-2 align-items-center">
 
                             <div className="hstack gap-2 justify-content-end">
-                              <a href="#" className="avatar-text avatar-md text-primary me-2">
+                              <Link to="/order-details" className="avatar-text avatar-md text-primary me-2">
                                 <i className="feather feather-eye"></i>
-                              </a>
+                              </Link>
+
                               <div className="dropdown">
                                 <a href="javascript:void(0)" className="avatar-text avatar-md text-success" data-bs-toggle="dropdown" data-bs-offset="0,21">
                                   <i className="feather feather-download-cloud"></i>
