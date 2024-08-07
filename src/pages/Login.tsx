@@ -58,7 +58,7 @@ function Login() {
                       </div>
                     </div>
                     <div>
-                      <a href="auth-reset-minimal.html" className="fs-11 text-primary">Forgot password?</a>
+                      <a href="/forgot-password" className="fs-11 text-primary">Forgot password?</a>
                     </div>
                   </div>
                   <div className="mt-5">
