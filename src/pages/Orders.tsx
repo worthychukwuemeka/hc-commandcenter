@@ -1,9 +1,12 @@
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useMemo, useState } from 'react';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import { FaSortAlphaDown, FaSortNumericDown, FaCalendarAlt, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { Link } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
 
 interface TableRowProps {
@@ -137,7 +140,7 @@ const Orders: React.FC = () => {
                 <h5 className="m-b-10">Orders</h5>
               </div>
               <ul className="breadcrumb">
-                <li className="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li className="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                 <li className="breadcrumb-item">Orders</li>
               </ul>
             </div>

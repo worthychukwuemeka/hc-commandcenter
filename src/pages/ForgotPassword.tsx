@@ -35,7 +35,7 @@ function ForgotPassword() {
                     </Link>
                   </div>
                 </form>
-
+  
               </div>
             </div>
           </div>
